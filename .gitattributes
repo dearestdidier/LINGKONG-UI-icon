@@ -1,0 +1,7 @@
+# 跨平台统一换行，避免 Windows/Linux 协作时的 CRLF diff 噪音
+* text=auto eol=lf
+
+# 二进制资源保持原样
+*.png binary
+*.jpg binary
+*.apk binary
