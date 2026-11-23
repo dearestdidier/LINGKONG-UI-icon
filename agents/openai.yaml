@@ -1,0 +1,4 @@
+interface:
+  display_name: "灵控桌面大图标适配"
+  short_description: "给 Android TV App 加上 TCL·雷鸟灵控桌面的大图标：标准 banner + beidouui_icon 私有协议，含诊断、生成、Manifest 注入与验证脚本"
+  default_prompt: "使用 $lingkong-tv-big-icon，帮我的 Android TV App 适配灵控桌面大图标。先告诉我项目源码路径或 APK 路径，我会诊断现状、生成横幅图、修改 Manifest 并验证。"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  完整示例：让 App 在 TCL/雷鸟灵控桌面显示大图标。
+
+  替换项：
+    package="com.example.app"  -> 你的包名
+    .MainActivity              -> 你的主 Activity
+
+  配套图片（用 scripts/gen_banner.py 生成）：
+    res/drawable-mdpi/banner.png     160x90
+    res/drawable-xhdpi/banner.png    320x180  (官方基准，必需)
+    res/drawable-xxhdpi/banner.png   640x360
+    assets/tv_launcher.png           640x360  (beidouui_icon 引用)
+
+  关键点：beidouui_icon 的 value 是 assets 下的裸文件名，不是 @drawable 引用。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.app">
+
+    <!-- 声明 TV 能力但不强制，保证手机/平板可安装 -->
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:banner="@drawable/banner"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:exported="true">
+
+        <!-- 默认入口：深色款，双通道齐全 -->
+        <activity-alias
+            android:name=".LauncherBigIcon"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:banner="@drawable/banner"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+            <!-- 灵控私有大图：assets/ 下的裸文件名 -->
+            <meta-data
+                android:name="beidouui_icon"
+                android:value="tv_launcher.png"/>
+        </activity-alias>
+
+        <!-- 可选第二套：浅色款。注意 enabled=false，同一时刻只能有一个入口启用 -->
+        <activity-alias
+            android:name=".LauncherLight"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_light"
+            android:banner="@drawable/banner_light"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+            <meta-data
+                android:name="beidouui_icon"
+                android:value="tv_launcher_light.png"/>
+        </activity-alias>
+
+        <!-- 真实主 Activity：仍保留 LAUNCHER 以兼容普通桌面 -->
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
