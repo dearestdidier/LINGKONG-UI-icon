@@ -1,4 +1,4 @@
-# 灵控桌面大图标适配（lingkong-tv-big-icon）
+# 灵控桌面大图标适配（LINGKONG-UI-icon）
 
 让 Android TV App 在 **TCL / 雷鸟「灵控桌面」** 上显示大图标（横幅大卡片），而不是默认的方形小图标。
 
